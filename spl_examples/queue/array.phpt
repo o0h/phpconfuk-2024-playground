@@ -1,17 +1,17 @@
 --TEST--
-arrayを使ったqueueの実現
+SplQueueを使ったqueueの実現
 
 --FILE--
 <?php
-$data = [];
+$data = new SplQueue();
 $items = ['foo', 'bar', 'baz'];
 
 foreach ($items as $item) {
-    array_push($data, $item);
+    $data->enqueue($item);
 }
 
-while($data) {
-    echo array_shift($data), PHP_EOL;
+while(!$data->isEmpty()) {
+    echo $data->dequeue(), PHP_EOL;
 }
 
 --EXPECT_EXTERNAL--
