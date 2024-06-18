@@ -1,9 +1,9 @@
 --TEST--
-SplQueueを使ったqueueの実現
+SplStackを使ったstackの実現
 
 --FILE--
 <?php
-$data = new SplQueue();
+$data = new SplStack();
 $items = ['foo', 'bar', 'baz'];
 
 foreach ($items as $item) {
@@ -15,6 +15,6 @@ foreach ($data as $item) {
 }
 
 --EXPECT--
-foo
-bar
 baz
+bar
+foo
