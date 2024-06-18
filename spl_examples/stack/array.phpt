@@ -1,5 +1,5 @@
 --TEST--
-arrayを使ったqueueの実現
+arrayを使ったstackの実現
 
 --FILE--
 <?php
