@@ -1,18 +1,17 @@
 --TEST--
-arrayを使ったstackの実現
+SplStackを使ったstackの実現
 
 --FILE--
 <?php
-$data = [];
+$data = new SplStack();
 $items = ['foo', 'bar', 'baz'];
 
 foreach ($items as $item) {
-    array_push($data, $item);
+    $data->push($item);
 }
-$data = array_reverse($data);
 
-while($data) {
-    echo array_shift($data), PHP_EOL;
+foreach ($data as $item) {
+    echo $item, PHP_EOL;
 }
 
 --EXPECT--
