@@ -1,9 +1,9 @@
 --TEST--
-arrayを使った優先度順での羅列の実現
+SplPriorityQueueを使った優先度順での羅列の実現
 
 --FILE--
 <?php
-$data = [];
+$data = new SplPriorityQueue();
 function items()
 {
    yield ['name' => 'エリカ', 'deban' => 3];
@@ -17,14 +17,12 @@ function items()
    yield ['name' => '???',    'deban' => 0];
 }
 
-foreach (items() as $i => ['name' => $name, 'deban' => $deban]) {
-  $k = sprintf('%05d.%f', $deban, 0.0001 * $i);
-  $data[$k] = $name;
+foreach (items() as ['name' => $name, 'deban' => $deban]) {
+    $data->insert($name, -1 * $deban);
 }
-ksort($data);
 
-while($data) {
-    echo array_shift($data) . PHP_EOL;
+while(!$data->isEmpty()) {
+    echo $data->extract() . PHP_EOL;
 }
 
 --EXPECT--
