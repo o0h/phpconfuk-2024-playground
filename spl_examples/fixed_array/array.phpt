@@ -1,18 +1,15 @@
 --TEST--
-arrayを使ったサイズ上限付き配列の実現
+SplFixedArrayを使ったサイズ上限付き配列の実現
 
 --FILE--
 <?php
 $sizeLimit = 3;
-$data = [];
+$data = new SplFixedArray($sizeLimit);
 $items = ['乃士', '出川', '多木', '雉川'];
 
 try {
-    foreach ($items as $item) {
-        if (count($data) >= $sizeLimit) {
-            throw new \RuntimeException('上限オーバー！');
-        }
-        array_push($data, $item);
+    foreach ($items as $i => $item) {
+        $data[$i] = $item;
     }
 } catch (\RuntimeException) {
     echo '上限オーバー！';
