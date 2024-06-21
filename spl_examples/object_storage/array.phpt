@@ -1,9 +1,9 @@
 --TEST--
-arrayを使った被りなしのオブジェクト集合
+SplObjectStorageを使った被りなしのオブジェクト集合
 
 --FILE--
 <?php
-$data = [];
+$data = new SplObjectStorage();
 
 $a = new stdClass();
 $a->val = 'a';
@@ -12,11 +12,7 @@ $b->val = 'b';
 $items = [$a, $b, $a];
 
 foreach ($items as $item) {
-  $key = spl_object_id($item);
-  if (array_key_exists($key, $data)) {
-    continue;
-  }
-  $data[$key] = $item;
+  $data->attach($item);
 }
 
 foreach ($data as $v) {
